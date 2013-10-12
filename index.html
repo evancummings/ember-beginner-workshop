@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Ember Starter Kit</title>
+<title>Choose your own Adventure</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap-theme.css">
@@ -21,17 +21,51 @@
   <script src="js/fixtures.js"></script>
 
   <script type="text/x-handlebars">
-    <h2>Welcome to Ember.js</h2>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="nav-header">
+			<a class="navbar-brand" href="#">Choose your own Adventure</a>
+		</div>
+	</nav>
+
 
     {{outlet}}
   </script>
 
-  <script type="text/x-handlebars" data-template-name="index">
-    <ul>
-    {{#each item in model}}
-      <li>{{item}}</li>
+  <script type="text/x-handlebars" data-template-name="stories/index">
+    <h3>Stories:</h3>
+		{{partial "stories/storiesList"}}
+	
+  </script>
+
+<script type="text/x-handlebars" data-template-name="stories/_storiesList">
+	<ul>
+    {{#each story in content}}
+      	<li>
+			{{#link-to 'stories.edit' story}}
+				<button class="btn btn-primary btn-xs">Edit</button>
+			{{/link-to}}
+			{{#link-to 'stories.show' story}}
+				{{story.title}}
+			{{/link-to}}
+		</li>
     {{/each}}
     </ul>
-  </script>
+</script>
+
+	<script type="text/x-handlebars" data-template-name="stories/show">
+		{{#link-to 'stories.edit' content}}
+			<button class="btn btn-primary">Edit</button>
+		{{/link-to}}
+		<h3>{{title}}</h3>
+	</script>
+	<script type="text/x-handlebars" data-template-name="stories/edit">
+		<button {{action save}} class="btn btn-success">Save</button>
+		<button {{action cancel}} class="btn btn-danger">Cancel</button>
+		<h3>Edit {{title}}</h3>
+		<fieldset>
+			<label>Title</label>
+			{{input value=title size="80"}}
+		</fieldset>
+	</script>
 </body>
 </html>

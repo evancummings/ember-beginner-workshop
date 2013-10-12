@@ -1,4 +1,4 @@
-/*
+
 App.Story.FIXTURES = [
   {
     id: 100,
@@ -21,7 +21,7 @@ App.Story.FIXTURES = [
     first_section: 2300
   }
 ];
-*/
+
 
 /*
 App.Section.FIXTURES = [
